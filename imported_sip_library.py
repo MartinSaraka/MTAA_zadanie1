@@ -65,8 +65,8 @@ rx_contact_expires = re.compile("expires=([^;$]*)")
 rx_expires = re.compile("^Expires: (.*)$")
 
 # global dictionnary
-recordroute = ""
-topvia = ""
+recordroute = "Record-Route: <sip:%s:%d;lr>" % (HOST, PORT)
+topvia = "Via: SIP/2.0/UDP %s:%d" % (HOST, PORT)
 registrar = {}
 
 
@@ -280,6 +280,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
             return
         destination = self.getDestination()
         if len(destination) > 0:
+
             logging.info("destination %s" % destination)
             if destination in registrar and self.checkValidity(destination):  # registrar.has_key(destination)
                 socket, claddr = self.getSocketInfo(destination)
@@ -292,6 +293,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
                 text = text.encode("utf-8")
                 socket.sendto(text, claddr)
                 showtime()
+
                 logging.info("<<< %s" % data[0])
                 logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text), text))
             else:
@@ -305,6 +307,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
         logging.debug("--------------")
         destination = self.getDestination()
         if len(destination) > 0:
+
             logging.info("destination %s" % destination)
             if destination in registrar:  # registrar.has_key(destination):
                 socket, claddr = self.getSocketInfo(destination)
@@ -330,6 +333,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
             return
         destination = self.getDestination()
         if len(destination) > 0:
+
             logging.info("destination %s" % destination)
             if destination in registrar and self.checkValidity(destination):
                 socket, claddr = self.getSocketInfo(destination)
@@ -342,6 +346,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
                 text = text.encode("utf-8")
                 socket.sendto(text, claddr)
                 showtime()
+
                 logging.info("<<< %s" % data[0])
                 logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text), text))
             else:
@@ -361,6 +366,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
                 text = text.encode("utf-8")
                 socket.sendto(text, claddr)
                 showtime()
+
                 logging.info("<<< %s" % data[0])
                 logging.debug("---\n<< server send [%d]:\n%s\n---" % (len(text), text))
 
@@ -439,8 +445,8 @@ def main_of_lib():
     topvia = "Via: SIP/2.0/UDP %s:%d" % (HOST, PORT)
     server = socketserver.UDPServer((HOST, PORT), UDPHandler)
     server.serve_forever()
-'''
 
+'''
 if __name__ == "__main__":
     print("hm")
-    # main_of_lib()
+    #main_of_lib()
