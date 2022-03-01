@@ -1,7 +1,7 @@
 from imported_sip_library import *
 
 def main():
-    print("ej bistu")
+    print("Martin Saraka MTAA zadanie 1")
 
     logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', filename='proxy.log', level=logging.INFO,
                         datefmt='%H:%M:%S')
