@@ -257,7 +257,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
         if expires == 0:
             if fromm in registrar:  # registrar.has_key(fromm)
                 del registrar[fromm]
-                self.sendResponse("200 0K")
+                self.sendResponse("200 super hej okey")
                 return
         else:
             now = int(time.time())
@@ -268,7 +268,7 @@ class UDPHandler(socketserver.BaseRequestHandler):
         logging.debug("Expires= %d" % expires)
         registrar[fromm] = [contact, self.socket, self.client_address, validity]
         self.debugRegister()
-        self.sendResponse("200 0K")
+        self.sendResponse("200 super hej okey")
 
     def processInvite(self):
         logging.debug("-----------------")
@@ -397,11 +397,11 @@ class UDPHandler(socketserver.BaseRequestHandler):
             elif rx_update.search(request_uri):
                 self.processNonInvite()
             elif rx_subscribe.search(request_uri):
-                self.sendResponse("200 0K")
+                self.sendResponse("200 super hej okey")
             elif rx_publish.search(request_uri):
-                self.sendResponse("200 0K")
+                self.sendResponse("200 super hej okey")
             elif rx_notify.search(request_uri):
-                self.sendResponse("200 0K")
+                self.sendResponse("200 super hej okey")
             elif rx_code.search(request_uri):
                 self.processCode()
             else:
